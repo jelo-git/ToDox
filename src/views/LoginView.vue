@@ -1,13 +1,39 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+import axios from 'axios';
+var userError = ref(false);
+var passError = ref(false);
+var username = ref('');
+var password = ref('');
+var validate = () => {
+    userError.value = false;
+    if (username.value == '') {
+        userError.value = true;
+    }
+    passError.value = false;
+    if (password.value == '') {
+        passError.value = true;
+    }
+    if (userError.value || passError.value) {
+        return;
+    }
+
+    axios.post('http://localhost/api/login', {
+        username: "username.value",
+        password: password.value
+    }).finally(() => {
+        console.log('done');
+    });
+}
 </script>
 
 <template>
     <div class="centered">
         <h1>Login</h1>
-        <input type="text" placeholder="Username" name="username" required/>
-        <input type="password" placeholder="Password" name="password" required/>
-        <button>Login</button>
+        <input v-model="username" v-bind:class="(userError)?'error':''" type="text" placeholder="Username" name="username" required/>
+        <input v-model="password" v-bind:class="(passError)?'error':''" type="password" placeholder="Password" name="password" required/>
+        <button v-on:click="validate">Login</button>
         <span>Don't have an account? <RouterLink to="/signup">Sign up</RouterLink></span>
     </div>
 
@@ -61,5 +87,8 @@ import { RouterLink } from 'vue-router'
     }
     span a{
         font-weight: 700;
+    }
+    .error{
+        border-color: var(--color-error);
     }
 </style>

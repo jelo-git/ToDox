@@ -9,6 +9,7 @@
   --color-primary: #63B1A0;
   --color-action: #F4E3AD;
   --color-action-warm: #E5CAA6;
+  --color-error: #e2684a;
 }
 
 body {
