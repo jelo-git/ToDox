@@ -20,6 +20,7 @@ export default {
 <template>
     <nav>
         <div class="container">
+            <i class="fa-solid fa-code"></i>
             <RouterLink to="/" class="link">ToDox</RouterLink>
 
             <div class="account" @click="toggleAccount">

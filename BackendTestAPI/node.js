@@ -14,7 +14,7 @@ app.use(cors({
 
 app.post('/api/login', jsonParser, (req, res) => {
     console.log(req.body);
-    res.sendStatus(200);
+    res.send({ success: true, username: req.body.username, token: '1234567890' });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

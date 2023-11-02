@@ -1,30 +1,25 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import axios from 'axios';
+import loginService from '../services/loginService';
+import router from '../router/index.js';
 var userError = ref(false);
 var passError = ref(false);
 var username = ref('');
 var password = ref('');
 var validate = () => {
-    userError.value = false;
-    if (username.value == '') {
-        userError.value = true;
+    loginService.username = username.value;
+    userError.value = loginService.userError;
+    loginService.password = password.value;
+    passError.value = loginService.passError;
+    if(!userError.value && !passError.value){
+        loginService.login().then((res) => {
+            console.log(res);
+            if(res){
+                router.push('/dashboard');
+            }
+        });
     }
-    passError.value = false;
-    if (password.value == '') {
-        passError.value = true;
-    }
-    if (userError.value || passError.value) {
-        return;
-    }
-
-    axios.post('http://localhost/api/login', {
-        username: "username.value",
-        password: password.value
-    }).finally(() => {
-        console.log('done');
-    });
 }
 </script>
 
