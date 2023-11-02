@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from './storeService.js'
 
 const LOGIN_API_BASE_URL = "http://localhost/api/login";
 
@@ -21,10 +22,6 @@ class LoginService {
             this.#passError = true;
         }
     }
-    #saveSession(username, token) {
-        sessionStorage.setItem('username', username);
-        sessionStorage.setItem('token', token);
-    }
     //public
     get username() { return this.#username; }
     set username(value) { this.#username = value.trim(); this.#validateUsername(); }
@@ -41,12 +38,11 @@ class LoginService {
     login() {
         return axios.post(LOGIN_API_BASE_URL, { username: this.#username, password: this.#password }).then(response => {
             if (response.data.success) {
-                this.#saveSession(response.data.username, response.data.token);
+                store.dispatch('login', { user: response.data.username, token: response.data.token });
             }
             return response
-        });
+        }).catch(error => { return error.response });
     }
-
 }
 
 export default new LoginService();

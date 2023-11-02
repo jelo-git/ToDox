@@ -12,8 +12,11 @@
   --color-error: #e2684a;
 }
 
-body {
+* {
   font-family: 'Montserrat', sans-serif;
+}
+
+body {
   min-height: 100vh;
   font-size: 1em;
   margin: 0;
@@ -27,4 +30,21 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.centered {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.main-box {
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px var(--background-color-alternative);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--navbar-bg);
+  color: var(--background-color-alternative);
 }

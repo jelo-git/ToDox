@@ -1,0 +1,49 @@
+h1 {
+    margin: 0;
+    margin-bottom: 16px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+input {
+    margin: 0.5rem 0;
+    border: 1px solid var(--background-color-alternative);
+    border-radius: 6px;
+    background-color: var(--color-primary);
+    color: black;
+    padding: 8px 16px;
+}
+
+input:focus {
+    outline: 0;
+    border-color: var(--color-action);
+}
+
+button {
+    border: none;
+    background-color: var(--color-action);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: large;
+    color: var(--background-color-alternative);
+    margin-top: 0.5rem;
+}
+
+span {
+    font-size: small;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+span a {
+    font-weight: 700;
+}
+
+.error {
+    border-color: var(--color-error);
+}
+
+.error-txt {
+    margin: 0;
+    color: var(--color-error);
+}

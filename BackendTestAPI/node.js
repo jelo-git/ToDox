@@ -13,8 +13,12 @@ app.use(cors({
 }));
 
 app.post('/api/login', jsonParser, (req, res) => {
-    console.log(req.body);
-    res.send({ success: true, username: req.body.username, token: '1234567890' });
+    // TODO db auth
+    if (req.body.username == 'admin' && req.body.password == 'admin') {
+        res.send({ success: true, username: req.body.username, token: '1234567890' });
+        return
+    }
+    res.sendStatus(401);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

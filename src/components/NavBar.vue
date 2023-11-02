@@ -1,35 +1,16 @@
-<script >
+<script setup>
 import { RouterLink } from 'vue-router'
-export default {
-    data() {
-        return {
-            accountActive: false
-        }
-    },
-    methods: {
-        toggleAccount() {
-            this.accountActive = !this.accountActive
-        }
-    },
-    components: {
-        RouterLink,
-    }
-}
 </script>
 
 <template>
     <nav>
         <div class="container">
-            <i class="fa-solid fa-code"></i>
-            <RouterLink to="/" class="link">ToDox</RouterLink>
-
-            <div class="account" @click="toggleAccount">
-                <img src="../assets/logo.png" alt="avatar" />
+            <div class="content">
+                <i class="fa-solid fa-list-check"></i>
+                <RouterLink to="/" class="link">ToDox</RouterLink>
             </div>
-        </div>
-        <div v-if="accountActive">
-            <div class="item">
-                <RouterLink to="/login">Login</RouterLink>
+            <div class="account">
+                <img src="../assets/logo.png" alt="avatar" />
             </div>
         </div>
     </nav>
@@ -49,10 +30,16 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
 }
+.content {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
 
 .link {
     font-size: larger;
     font-weight: 700;
+    margin-left: 12px;
     color: var(--navbar-text);
 }
 
