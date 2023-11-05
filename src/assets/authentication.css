@@ -19,16 +19,6 @@ input:focus {
     border-color: var(--color-action);
 }
 
-button {
-    border: none;
-    background-color: var(--color-action);
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: large;
-    color: var(--background-color-alternative);
-    margin-top: 0.5rem;
-}
-
 span {
     font-size: small;
     opacity: 0.8;

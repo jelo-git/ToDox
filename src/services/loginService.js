@@ -1,9 +1,12 @@
 import axios from 'axios';
-import store from './storeService.js'
+import store from './storeService'
 
 const LOGIN_API_BASE_URL = "http://localhost/api/login";
 
 class LoginService {
+    constructor() {
+        console.log('LoginService constructor');
+    }
     //private
     #username = '';
     #password = '';
@@ -45,4 +48,4 @@ class LoginService {
     }
 }
 
-export default new LoginService();
+export default LoginService;

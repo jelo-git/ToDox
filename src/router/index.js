@@ -36,10 +36,12 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(r => r.meta.requiresAuth)) {
     if (store.getters.isUserLoggedIn) {
       next()
+      return
     }
     next('/login')
+  } else {
+    next()
   }
-  next()
 })
 
 // check if route requires quest
@@ -47,10 +49,12 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(r => r.meta.quest)) {
     if (store.getters.isUserLoggedIn) {
       next('/dashboard')
+      return
     }
     next()
+  } else {
+    next()
   }
-  next()
 })
 
 export default router

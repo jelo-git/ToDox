@@ -2,21 +2,31 @@
 import router from '../router/index.js';
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import loginService from '../services/loginService';
+import signupService from '../services/signupService';
+let signup = new signupService();
 
-var userError = ref(false);
-var passError = ref(false);
-var loginError = ref(false);
-var username = ref('');
-var password = ref('');
-var validate = () => {
-    console.log('validating')
-    loginService.username = username.value;
-    userError.value = loginService.userError;
-    loginService.password = password.value;
-    passError.value = loginService.passError;
-    if(!userError.value && !passError.value){
-        loginService.login().then((res) => {
+let userError = ref(false);
+let emailError = ref(false);
+let passError = ref(false);
+let repassError=ref(false);
+let loginError = ref(false);
+
+let username = ref('');
+let email = ref('');
+let password = ref('');
+let repassword = ref('');
+
+let validate = () => {
+    signup.username = username.value;
+    userError.value = signup.userError;
+    signup.password = password.value;
+    passError.value = signup.passError;
+    signup.email = email.value;
+    emailError.value = signup.emailError;
+    signup.repassword = repassword.value;
+    repassError.value = signup.repassError;
+    if(signup.validate()){
+        signup.signup().then((res) => {
             if (res.status != 200) {
                 loginError.value = true;
             } else {
@@ -29,12 +39,14 @@ var validate = () => {
 
 <template>
     <div class="centered main-box">
-        <h1>Login</h1>
-        <span v-if="loginError" class="error-txt">Invalid username or password</span>
-        <input v-model="username" v-bind:class="(userError)?'error':''" type="text" placeholder="Username" name="username" required/>
+        <h1>Sign up</h1>
+        <span v-if="loginError" class="error-txt">Invalid username or email</span>
+        <input v-on:keyup.enter="validate" v-model="username" v-bind:class="(userError)?'error':''" type="text" placeholder="Username" name="username" required/>
+        <input v-on:keyup.enter="validate" v-model="email" v-bind:class="(emailError)?'error':''" type="text" placeholder="Email" name="email" required/>
         <input v-on:keyup.enter="validate" v-model="password" v-bind:class="(passError)?'error':''" type="password" placeholder="Password" name="password" required/>
-        <button v-on:click="validate">Login</button>
-        <span>Don't have an account? <RouterLink to="/signup">Sign up</RouterLink></span>
+        <input v-on:keyup.enter="validate" v-model="repassword" v-bind:class="(repassError)?'error':''" type="password" placeholder="Repeat password" name="repassword" required/>
+        <button v-on:click="validate">Sign up</button>
+        <span>Already have an account? <RouterLink to="/login">Login</RouterLink></span>
     </div>
 
 </template>

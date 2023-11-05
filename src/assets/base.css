@@ -8,7 +8,7 @@
   --background-color-alternative: #304F58;
   --color-primary: #63B1A0;
   --color-action: #F4E3AD;
-  --color-action-warm: #E5CAA6;
+  --color-action-hover: #E5CAA6;
   --color-error: #e2684a;
 }
 
@@ -30,6 +30,23 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+button,
+.button {
+  background-color: var(--color-action);
+  color: var(--background-color-alternative);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: large;
+  margin-top: 0.5rem;
+}
+
+button:hover,
+.button:hover {
+  background-color: var(--color-action-hover);
+  transition: background-color 0.1s;
 }
 
 .centered {
