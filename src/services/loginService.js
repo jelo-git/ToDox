@@ -1,7 +1,7 @@
 import axios from 'axios';
-import store from './storeService'
+import store from './storeService';
 
-const LOGIN_API_BASE_URL = "http://localhost/api/login";
+const LOGIN_API_BASE_URL = "http://localhost:8080/api/auth/login";
 
 class LoginService {
     constructor() {
@@ -39,9 +39,9 @@ class LoginService {
         return !(this.#userError || this.#passError);
     }
     login() {
-        return axios.post(LOGIN_API_BASE_URL, { username: this.#username, password: this.#password }).then(response => {
-            if (response.data.success) {
-                store.dispatch('login', { user: response.data.username, token: response.data.token });
+        return axios.post(LOGIN_API_BASE_URL, { username: this.#username, password: this.#password }, { withCredentials: true }).then(response => {
+            if (response.status == 200) {
+                store.dispatch('login', { user: response.data.username, roles: response.data.roles, id: response.data.id });
             }
             return response
         }).catch(error => { return error.response });

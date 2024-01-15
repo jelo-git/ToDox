@@ -2,7 +2,7 @@ import LoginService from './loginService'
 import store from './storeService'
 import axios from 'axios';
 
-const SIGNUP_API_BASE_URL = "http://localhost/api/signup";
+const SIGNUP_API_BASE_URL = "http://localhost:8080/api/auth/register";
 
 class SignupService extends LoginService {
     constructor() {
@@ -40,14 +40,13 @@ class SignupService extends LoginService {
         return super.validate() && !(this.#emailError || this.#repassError);
     }
     signup() {
-        return axios.post(SIGNUP_API_BASE_URL, { username: this.username, password: this.password, email: this.email }).then(response => {
-            if (response.data.success) {
-                store.dispatch('login', { user: response.data.username, token: response.data.token });
-            }
-            return response
+        return axios.post(SIGNUP_API_BASE_URL, { username: this.username, password: this.password, email: this.#email }).then(response => {
+            if (response.status != 201)
+                throw response;
+        }).then(_ => {
+            return super.login();
         }).catch(error => { return error.response });
     }
-
 }
 
 export default SignupService;

@@ -1,0 +1,84 @@
+.tooltip {
+    margin: 12px auto 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tooltip>* {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.container {
+    display: flex;
+    margin: 24px auto 0 auto;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 24px;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px var(--background-color-alternative);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--navbar-bg);
+    color: var(--background-color-alternative);
+    max-width: 500px;
+    height: 100%;
+}
+
+.card h1 {
+    margin: 0;
+}
+
+.card .description {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+}
+
+.card .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.card .footer span {
+    opacity: 0.8;
+}
+
+.card .footer button {
+    /* margin: 0.5rem 0; */
+    margin-left: 8px;
+    border: 1px solid var(--background-color-alternative);
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--background-color-alternative);
+    padding: 8px 16px;
+    transition: all 0.1s;
+}
+
+.card .footer button:hover {
+    background-color: var(--background-color);
+    color: var(--color-action);
+}
+
+.card .footer button:active {
+    color: var(--color-action-hover);
+}
+
+.late {
+    background-color: var(--color-error);
+}
+
+.done {
+    background-color: var(--navbar-bg);
+    opacity: 0.5;
+}

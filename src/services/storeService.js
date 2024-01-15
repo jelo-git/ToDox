@@ -4,15 +4,19 @@ import createPersistedState from "vuex-persistedstate";
 const store = createStore({
     state: {
         user: null,
-        token: null,
+        roles: null,
+        id: null,
         isUserLoggedIn: false
     },
     getters: {
         user(state) {
             return state.user;
         },
-        token(state) {
-            return state.token;
+        roles(state) {
+            return state.roles;
+        },
+        id(state) {
+            return state.id;
         },
         isUserLoggedIn(state) {
             return state.isUserLoggedIn;
@@ -29,13 +33,18 @@ const store = createStore({
     mutations: {
         login(state, payload) {
             state.user = payload.user;
-            state.token = payload.token;
-            state.isUserLoggedIn = true;
+            state.roles = payload.roles;
+            state.id = payload.id;
+            state.isUserLoggedIn = !!payload.user;
         },
         logout(state) {
             state.user = null;
-            state.token = null;
+            state.roles = null;
+            state.id = null;
             state.isUserLoggedIn = false;
+            if (document.cookie.includes('bezkoder')) {
+                document.cookie = "bezkoder=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            }
         }
     },
     plugins: [createPersistedState()]

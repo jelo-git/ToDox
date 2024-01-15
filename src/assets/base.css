@@ -10,6 +10,10 @@
   --color-action: #F4E3AD;
   --color-action-hover: #E5CAA6;
   --color-error: #e2684a;
+
+  --late: #b1636c;
+  --soon: #e2684a;
+  --soon2: #b18663;
 }
 
 * {
@@ -64,4 +68,18 @@ button:hover,
   flex-direction: column;
   background-color: var(--navbar-bg);
   color: var(--background-color-alternative);
+}
+
+.prio {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px);
+}
+
+.prio>* {
+  z-index: 2;
 }
