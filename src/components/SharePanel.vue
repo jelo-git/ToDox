@@ -29,7 +29,6 @@ let submit = () => {
   err.value = false;
   editToDo.users.push(parseInt(Number(user.value)));
   editToDo.update().then((res) => {
-    console.log(res);
     if (res.status != 200) {
       alert("There was an error");
     } else {

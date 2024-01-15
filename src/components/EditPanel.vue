@@ -19,8 +19,6 @@ let titleError = ref(false);
 let dueDateError = ref(false);
 
 let submit = () => {
-  console.log("submit");
-  console.log(localDueDate.value);
   editToDo.title = localTitle.value;
   titleError.value = editToDo.titleError;
   editToDo.description = localDescription.value;
