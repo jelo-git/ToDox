@@ -26,7 +26,6 @@ let submit = () => {
   dueDateError.value = editToDo.dueDateError;
   if (editToDo.validate()) {
     editToDo.update().then((res) => {
-      console.log(res);
       if (res.status != 201) {
         alert("There was an error");
       } else {
@@ -36,6 +35,16 @@ let submit = () => {
   }
   dueDateError.value = editToDo.dueDateError;
   titleError.value = editToDo.titleError;
+};
+
+let deleteToDo = () => {
+  editToDo.delete().then((res) => {
+    if (res.status != 200) {
+      alert("There was an error");
+    } else {
+      alert("ToDo deleted");
+    }
+  });
 };
 </script>
 
@@ -47,8 +56,16 @@ let submit = () => {
     <textarea v-model="localDescription" type="textarea" placeholder="Description" name="description" />
     <span v-if="dueDateError" class="error-txt">Invalid due date</span>
     <input v-model="localDueDate" v-bind:class="dueDateError ? 'error' : ''" type="datetime-local" placeholder="Due date" name="dueDate" required />
-    <button v-on:click="submit">Add</button>
+    <div>
+      <button v-on:click="submit"><font-awesome-icon icon="fa-solid fa-plus" /></button>
+      <button class="delete" v-on:click="deleteToDo"><font-awesome-icon icon="fa-solid fa-trash" /></button>
+    </div>
   </div>
 </template>
 
 <style src="../assets/authentication.css" scoped></style>
+<style scoped>
+.delete {
+  background-color: var(--color-error);
+}
+</style>

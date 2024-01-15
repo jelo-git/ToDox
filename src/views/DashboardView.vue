@@ -54,6 +54,14 @@ let formatISODate = (isoDateString) => {
   });
 };
 
+let formatUsers = (users) => {
+  let userString = "";
+  users.forEach((user) => {
+    userString += user + ", ";
+  });
+  return userString.slice(0, -2);
+};
+
 let changeFinishStatus = (todo) => {
   let editor = new EditToDoService(todo);
   editor.finished = !editor.finished;
@@ -79,8 +87,8 @@ let addUser = (todo) => {
 
 <template>
   <div class="tooltip">
-    <button class="button" v-on:click="getRecentTodos">Refresh</button>
-    <button class="button" v-on:click="addNewTodo">Add</button>
+    <button class="button" v-on:click="getRecentTodos"><font-awesome-icon icon="fa-solid fa-arrows-rotate" /></button>
+    <button class="button" v-on:click="addNewTodo"><font-awesome-icon icon="fa-solid fa-plus" /></button>
   </div>
   <div class="prio" v-if:="addPanelRender || editPanelRender || sharePanelRender" v-on:click="exit">
     <AddPanel v-if:="addPanelRender" class="centered" @click.stop />
@@ -92,7 +100,10 @@ let addUser = (todo) => {
       <h1>{{ todo.title }}</h1>
       <p class="description">{{ todo.description }}</p>
       <div class="footer">
-        <span>{{ formatISODate(todo.dueDate) }}</span>
+        <div class="spans">
+          <span>Owners: {{ formatUsers(todo.usersId) }}</span>
+          <span>{{ formatISODate(todo.dueDate) }}</span>
+        </div>
         <div>
           <button class="button" v-on:click="addUser(todo)"><font-awesome-icon icon="fa-solid fa-share-nodes" /></button>
           <button class="button" v-on:click="editToDo(todo)"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></button>

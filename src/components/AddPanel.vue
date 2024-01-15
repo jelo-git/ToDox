@@ -36,7 +36,7 @@ let submit = () => {
     <textarea v-model="description" type="textarea" placeholder="Description" name="description" />
     <span v-if="dueDateError" class="error-txt">Invalid due date</span>
     <input v-model="dueDate" v-bind:class="dueDateError ? 'error' : ''" type="datetime-local" placeholder="Due date" name="dueDate" required />
-    <button v-on:click="submit">Add</button>
+    <button v-on:click="submit"><font-awesome-icon icon="fa-solid fa-plus" /></button>
   </div>
 </template>
 
